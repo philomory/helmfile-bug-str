@@ -1,0 +1,19 @@
+values:
+  - foo: 1
+
+repositories:
+  - name: jenkins-x
+    url: https://jenkins-x-charts.github.io/v2/
+
+releases:
+  - name: empty
+    chart: jenkins-x/empty
+    version: 0.0.3
+    values:
+      {{- if ge .Values.foo 2 }}
+      - configMap:
+          enabled: true
+      {{- else }}
+      - configMap:
+          enabled: false
+      {{- end }}
